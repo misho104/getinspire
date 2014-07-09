@@ -32,6 +32,10 @@ import sys
 import os.path
 import optparse
 
+from bibtexparser.bparser import BibTexParser
+import logging, sys
+logging.basicConfig(stream=sys.stderr, level=logging.WARN)
+
 __version__ = "0.1.0"
 #__call__ example
 class A:
@@ -213,24 +217,20 @@ def insert_BibTeXRecord_to_bib_file(Cite,bibfile):
         f=open(bibfile,'w')
         f.write('')
         f.close()
-        
-    f=open(bibfile) 
-    art=f.read()
-    f.close()
+
+    with open(bibfile, 'r') as f:
+        bibtexfile_bibs = BibTexParser(f.read(), ignore_nonstandard_types = False).get_entry_dict()
+
 
     f=open(bibfile,'a') #preparing to append to bib file
 
-    #Extract BibTeX Keys from bib file (as dictionary):
-    bibtexfile_keys=ExtractBibkeys(art)
-
-
     newbib=Record()
-    
+
     sys.stdout.write('Downloading newbibs\n')
 
     for i in Cite.texkey.iterkeys():
         if checkfind(i).has_key('texkey'):
-            if not bibtexfile_keys.has_key(i):
+            if not bibtexfile_bibs.has_key(i):
                 bib=newbib.getBibTeX(i)
                 time.sleep(0.2)
                 sys.stdout.write('.')

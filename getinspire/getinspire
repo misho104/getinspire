@@ -221,6 +221,8 @@ def insert_BibTeXRecord_to_bib_file(Cite,bibfile):
     with open(bibfile, 'r') as f:
         bibtexfile_bibs = BibTexParser(f.read(), ignore_nonstandard_types = False).get_entry_dict()
 
+    existing_bibs = map(lambda t: t.lower(), bibtexfile_bibs.keys())
+
     # build key lists to check
     keys_to_be_checked = Cite.texkey.keys()
     for i in Cite.texkey.iterkeys():
@@ -235,7 +237,7 @@ def insert_BibTeXRecord_to_bib_file(Cite,bibfile):
 
     for i in keys_to_be_checked:
         if checkfind(i).has_key('texkey'):
-            if not bibtexfile_bibs.has_key(i):
+            if not i.lower() in existing_bibs:
                 bib=newbib.getBibTeX(i)
                 time.sleep(0.2)
                 sys.stdout.write('.')

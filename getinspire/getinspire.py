@@ -32,8 +32,8 @@ import optparse
 import time
 from functools import total_ordering
 
-from inspire import *
-from getinspire_examples import sample_latex, sample_bibtex
+from getinspire.inspire import *
+from getinspire.getinspire_examples import sample_latex, sample_bibtex
 
 import pybtex.database
 from pybtex.utils import OrderedCaseInsensitiveDict as ODict

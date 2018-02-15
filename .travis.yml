@@ -1,0 +1,16 @@
+language: python
+python:
+  - 2.7
+# - 3.6
+branches:
+  only:
+    - master
+    - development
+
+# we maybe should use pytest + coverall, or + "setup.py test"...?
+# we maybe avoid using Enum...
+install:
+  - pip install pybtex enum34
+script:
+  - python getinspire/test/test_bblmode.py
+

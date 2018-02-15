@@ -11,7 +11,7 @@ import re
 from compiler.ast import flatten
 
 TEST_DATA   = os.path.join(os.path.dirname(__file__), "data")
-TEST_SCRIPT = ["python2", os.path.join(os.path.realpath(os.path.dirname(__file__)), "..", "..", "getinspire")]
+TEST_SCRIPT = ["python", os.path.join(os.path.realpath(os.path.dirname(__file__)), "..", "..", "getinspire")]
 
 BIBKEY_MAP = {
     'astro-ph/0302209': {'key': 'Spergel:2003cb',   'title':'First year Wilkinson Microwave'},

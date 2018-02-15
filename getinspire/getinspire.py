@@ -266,8 +266,7 @@ class TeX(object):
                     print('skip existing: {}'.format(ref.key))
                 continue
             if Key.is_unknown(ref.key):
-                if DEBUG:
-                    print('skip unknown: {}'.format(ref.key))
+                print('WARNING: skip non-existing but unknown-type key {}'.format(ref.key))
                 continue
 
             try:

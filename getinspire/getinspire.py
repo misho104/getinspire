@@ -115,9 +115,9 @@ class Position(object):
 
     def __lt__(self, other):
         if self.l == other.l:
-            return self.c.__lt__(other.c)
+            return self.c < other.c  # python2 does not have __lt__ for int.
         else:
-            return self.l.__lt__(other.l)
+            return self.l < other.l
 
     def copy(self):
         return Position(l=self.l, c=self.c)
@@ -191,7 +191,7 @@ class TeX(object):
         return self._bbl
 
     def modify_and_write_bbl(self, new_content, append=True):
-        begin = '\\begin[10]{thebibliography}'
+        begin = '\\begin{thebibliography}{99}'
         end = '\\end{thebibliography}'
         if append:
             sep = re.split(r'\\end\s*{\s*thebibliography\s*}', self.bbl(), maxsplit=1)

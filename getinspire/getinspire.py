@@ -90,8 +90,9 @@ class Position(object):
 
     def __init__(self, **kwargs):
         if 'str' in kwargs:
-            self.l = len(self.LINESEP_REGEX.findall(kwargs['str']))
-            self.c = len(self.LASTLINE_REGEX.search(kwargs['str']).group(0))
+            lines = re.split(self.LINESEP_REGEX, kwargs['str'])
+            self.l = len(lines) - 1
+            self.c = len(lines[-1])
         elif 'l' in kwargs and 'c' in kwargs:
             self.l = kwargs['l']
             self.c = kwargs['c']

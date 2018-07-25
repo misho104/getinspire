@@ -4,8 +4,7 @@ python:
 # - 3.6
 branches:
   only:
-    - master
-    - development
+    - test
 
 # we maybe should use pytest + coverall, or + "setup.py test"...?
 # we maybe avoid using Enum...

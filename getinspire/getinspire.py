@@ -347,7 +347,7 @@ class Ref:
             print(e)
             return
         # validation or messaging is done in TeX class
-        match = re.search(r'^@[a-zA-Z]+{(.*?),', self.content)
+        match = re.search(r'^@[a-zA-Z]+{(.*?),', self.content, re.MULTILINE)
         if not match:
             raise InvalidFetchResult(self.content)
         new_key = match.group(1)

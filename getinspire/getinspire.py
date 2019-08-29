@@ -125,7 +125,7 @@ class Position(object):
 
 
 class TeX(object):
-    CITE_REGEX = re.compile(r'(?P<pre>(\\cite(\[.*?\])?{))(?P<body>.*?)}', re.DOTALL)
+    CITE_REGEX = re.compile(r'(?P<pre>(\\(cite|nocite)(\[.*?\])?{))(?P<body>.*?)}', re.DOTALL)
     CITE_BIB_IN_TEX = re.compile(r'\\bibliography{(.*?)}', re.DOTALL)
     CITE_BIB_IN_BBL = re.compile(r'\\bibitem{(.*?)}', re.DOTALL)
     COMMENTS_REGEX = re.compile(r'((?:^|[^\\])(?:\\\\)*)%.*$', re.MULTILINE)
@@ -347,7 +347,7 @@ class Ref:
             print(e)
             return
         # validation or messaging is done in TeX class
-        match = re.search(r'^@[a-zA-Z]+{(.*?),', self.content)
+        match = re.search(r'^@[a-zA-Z]+{(.*?),', self.content, re.MULTILINE)
         if not match:
             raise InvalidFetchResult(self.content)
         new_key = match.group(1)
